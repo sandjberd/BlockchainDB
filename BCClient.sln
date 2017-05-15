@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCScanner", "BCScanner\BCScanner.csproj", "{8C5BF9DF-618F-49A1-B4F8-E2CF1EFFECAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiChainLib", "D:\Privat\Private_Projekte\BlockChain\Multichain\MultiChainLib-master\MultiChainLib-master\MultiChainLib\MultiChainLib.csproj", "{F7C35562-FDD5-4124-86DF-B8BE94CF816D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiChainLib", "MultiChainLib\MultiChainLib.csproj", "{F7C35562-FDD5-4124-86DF-B8BE94CF816D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
