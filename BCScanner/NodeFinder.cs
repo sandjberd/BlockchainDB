@@ -12,7 +12,7 @@ namespace BCScanner
 {
     public class NodeFinder
     {
-        private static int port = 5901; //TODO: put it in a config file
+        private static int port = 7358; //TODO: put it in a config file
         private static List<string> blockChainNodes = new List<string>();
 
         public List<string> getBlockchainNodes()

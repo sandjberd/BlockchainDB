@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCClient", "BCClient\BCClient.csproj", "{08E7CB54-96F3-4D2A-B986-36DF6E9122BF}"
 EndProject
@@ -15,6 +15,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCScanner", "BCScanner\BCScanner.csproj", "{8C5BF9DF-618F-49A1-B4F8-E2CF1EFFECAF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiChainLib", "MultiChainLib\MultiChainLib.csproj", "{F7C35562-FDD5-4124-86DF-B8BE94CF816D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCClientTest", "BCClientTest\BCClientTest.csproj", "{C41DD36C-25D2-4AFB-BF62-79563FCA981E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +36,10 @@ Global
 		{F7C35562-FDD5-4124-86DF-B8BE94CF816D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7C35562-FDD5-4124-86DF-B8BE94CF816D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7C35562-FDD5-4124-86DF-B8BE94CF816D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C41DD36C-25D2-4AFB-BF62-79563FCA981E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C41DD36C-25D2-4AFB-BF62-79563FCA981E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C41DD36C-25D2-4AFB-BF62-79563FCA981E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C41DD36C-25D2-4AFB-BF62-79563FCA981E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

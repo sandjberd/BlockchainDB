@@ -56,6 +56,10 @@
       <Project>{8c5bf9df-618f-49a1-b4f8-e2cf1effecaf}</Project>
       <Name>BCScanner</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MultiChainLib\MultiChainLib.csproj">
+      <Project>{f7c35562-fdd5-4124-86df-b8be94cf816d}</Project>
+      <Name>MultiChainLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
