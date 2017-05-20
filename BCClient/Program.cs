@@ -28,13 +28,19 @@ namespace BCClient
             IEnumerable<string> address = new string[] { "1Tp4tJSnhtJefoXJKJUm5dFinCce7zZz9H13JK" };
 
             var client = new MultiChainClient("192.168.1.107", 6718, false, "multichainrpc", "topgeheimespasswort", "sandjChain");
-            //var x = await client.GetInfoAsync();
-            var x = await client.GrantAsync(address, BlockchainPermissions.Connect,0,"0","0",0,0);
+            var x = await client.GetListStreamItems("root");
+            //var x = await client.GrantAsync(address, BlockchainPermissions.Connect,0,"0","0",0,0);
             
+            
+
             Console.WriteLine("RunAsync");
             //x.AssertOk();
             //Console.WriteLine(x.Result.ChainName);
-            Console.WriteLine(x.Result.ToString());
+            for (int i = 0;i < x.Result.Count;i++)
+            {
+                Console.WriteLine(x.Result[i].Key);
+            }
+            
 
         }
 

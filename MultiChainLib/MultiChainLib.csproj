@@ -75,6 +75,7 @@
     <Compile Include="Model\ReceivedResponse.cs" />
     <Compile Include="Model\ScriptResponse.cs" />
     <Compile Include="Model\ScriptSigResponse.cs" />
+    <Compile Include="Model\StreamItemResponse.cs" />
     <Compile Include="Model\TransactionResponse.cs" />
     <Compile Include="Model\ScriptPubKeyResponse.cs" />
     <Compile Include="Model\TxAssetResponse.cs" />

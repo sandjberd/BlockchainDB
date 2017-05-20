@@ -505,6 +505,11 @@ namespace MultiChainLib
             return this.ExecuteAsync<List<AssetBalanceResponse>>("getaddressbalances", 0, address, confirmations, includeLocked);
         }
 
+        public Task<JsonRpcResponse<List<StreamItemResponse>>> GetListStreamItems(string stream)
+        {
+            return this.ExecuteAsync<List<StreamItemResponse>>("liststreamitems",0,stream);
+        }
+
         public Task<JsonRpcResponse<List<string>>> GetAddressesByAccountAsync(string account)
         {
             return this.ExecuteAsync<List<string>>("getaddressesbyaccount", 0, account ?? string.Empty);
