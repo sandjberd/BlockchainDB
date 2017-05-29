@@ -17,8 +17,8 @@ namespace BCClient.IO
         private List<string> multichainPaths = new List<string>();
         public MultichainContainer() 
         {
-            string usersPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            ProcessDirectory("C:\\VTRoot\\");
+            string usersPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            ProcessDirectory(usersPath+"\\MultiChain");
         }
         public void ProcessDirectory(string targetDirectory)
         {
@@ -34,9 +34,9 @@ namespace BCClient.IO
                 foreach (string subdirectory in subdirectoryEntries)
                     ProcessDirectory(subdirectory);
             }
-            catch
+            catch(Exception ex)
             {
-                Console.WriteLine("Some ERROR"); //TODO: insert into Log (Authorization exception)
+                Console.WriteLine("Some ERROR {0}",ex.Message); //TODO: insert into Log (Authorization exception)
             }
         }
 

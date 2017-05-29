@@ -45,21 +45,43 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IO\MultichainContainer.cs" />
+    <Compile Include="MChainController\MChainStart.cs" />
+    <Compile Include="Nodefinder\NodeFinder.cs" />
+    <Compile Include="Nodefinder\Scanner\IpScanner.cs" />
+    <Compile Include="Nodefinder\Scanner\PortScanner.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BCScanner\BCScanner.csproj">
-      <Project>{8c5bf9df-618f-49a1-b4f8-e2cf1effecaf}</Project>
-      <Name>BCScanner</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MultiChainLib\MultiChainLib.csproj">
       <Project>{f7c35562-fdd5-4124-86df-b8be94cf816d}</Project>
       <Name>MultiChainLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MultiChainApps\multichain-cli.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MultiChainApps\multichain-util.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MultiChainApps\multichaind.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

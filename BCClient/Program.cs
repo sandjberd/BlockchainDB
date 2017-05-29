@@ -5,22 +5,86 @@ using System.Text;
 using System.Threading.Tasks;
 using MultiChainLib;
 using System.Threading;
-using BCScanner;
+using BCClient.Nodefinder;
 using BCClient.IO;
+using BCClient.MChainController;
 
 namespace BCClient
 {
     class Program
     {
-        private static MultichainContainer container;
+        private static MultichainContainer container = new MultichainContainer();
+        private static MChainStart mchainStarter = new MChainStart();
+        private static string runningNode = "";
         static void Main(string[] args)
         {
             
-            Console.WriteLine("Multichain starting");
-            //container = new MultichainContainer();
+            Console.WriteLine("BCClient started");
 
-            RunAsync().GetAwaiter().GetResult();
-            //Console.WriteLine(finder.getBlockchainNodes()[0].ToString());
+            if (ExistMultichain("sandjChain"))
+            {
+                string key;
+
+                while ((key = Console.ReadKey().KeyChar.ToString()) != "6")
+                {
+                    int keyValue;
+                    int.TryParse(key, out keyValue);
+
+                    ProcessInput(keyValue);
+                }
+            }
+            else
+            {
+                //Todo: need new Nodefinder
+                runningNode = "10.0.0.11:6719";
+                string address = mchainStarter.InitBlockChain(runningNode);
+                Console.WriteLine("Yeah here is the address"+address);
+            }
+
+
+        }
+
+        private static void ProcessInput(int keyValue)
+        {
+            switch (keyValue)
+            {
+                case 1:
+                    Console.WriteLine("Starting Multichain");
+
+                    if (mchainStarter.StartDaemon())
+                    {
+                        Console.WriteLine("Jippie");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Node not started");
+                    }
+                    
+                    /*
+                    var task = Task.Run(async () => { return await mchainStarter.StartDaemonAsync(); });
+                    if (task.Result == true)
+                    {
+                        Console.WriteLine("Node Started");
+                    }
+                    else if (task.Result == false)
+                    {
+                        Console.WriteLine("Nope");
+                    }
+                    */
+                    break;
+                case 2:
+                    Console.WriteLine("Starting Multichain");
+                    break;
+                case 3:
+                    Console.WriteLine("Starting Multichain");
+                    break;
+                case 4:
+                    Console.WriteLine("Starting Multichain");
+                    break;
+                case 5:
+                    Console.WriteLine("Starting Multichain");
+                    break;
+            }
         }
 
         public static async Task RunAsync()
@@ -40,11 +104,9 @@ namespace BCClient
             {
                 Console.WriteLine(x.Result[i].Key);
             }
-            
-
         }
 
-        public bool ExistMultichain(string multichainName)
+        public static bool ExistMultichain(string multichainName)
         {
             List<string> multichainpaths = container.GetAllMultichainPaths();
             

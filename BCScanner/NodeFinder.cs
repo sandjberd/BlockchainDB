@@ -12,10 +12,9 @@ namespace BCScanner
 {
     public class NodeFinder
     {
-        private static int port = 7358; //TODO: put it in a config file
         private static List<string> blockChainNodes = new List<string>();
 
-        public List<string> getBlockchainNodes()
+        public List<string> getBlockchainNodes(int port)
         {
             string hostName = Dns.GetHostName();
             string myIP = Dns.GetHostByName(hostName).AddressList[0].ToString(); //TODO: deprecated
@@ -25,7 +24,7 @@ namespace BCScanner
             {
                 //Scan ports
                 var ports = PortScanner.Scan(ip, port, port);
-                foreach (var port in ports)
+                foreach (var portLocla in ports)
                 {
                     blockChainNodes.Add(ip + ":" + port);
                     Console.WriteLine(string.Format("Found open port: {0}", port.ToString())); //TODO: write into log
