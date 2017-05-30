@@ -88,6 +88,42 @@ namespace BCClient.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 0.0.0.0/0 ähnelt.
+        /// </summary>
+        internal static string rpcallowip {
+            get {
+                return ResourceManager.GetString("rpcallowip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die topgeheimespasswort ähnelt.
+        /// </summary>
+        internal static string rpcpassword {
+            get {
+                return ResourceManager.GetString("rpcpassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 6718 ähnelt.
+        /// </summary>
+        internal static string rpcport {
+            get {
+                return ResourceManager.GetString("rpcport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die multichainrpc ähnelt.
+        /// </summary>
+        internal static string rpcuser {
+            get {
+                return ResourceManager.GetString("rpcuser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die data ähnelt.
         /// </summary>
         internal static string valueStream {

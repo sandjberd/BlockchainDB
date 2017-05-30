@@ -21,27 +21,36 @@ namespace BCClient
             
             Console.WriteLine("BCClient started");
 
-            if (ExistMultichain("sandjChain"))
+            if (container.ExistMultichain("sandjChain"))
             {
-                string key;
-
-                while ((key = Console.ReadKey().KeyChar.ToString()) != "6")
-                {
-                    int keyValue;
-                    int.TryParse(key, out keyValue);
-
-                    ProcessInput(keyValue);
-                }
+                Userprocedure();
             }
             else
             {
                 //Todo: need new Nodefinder
                 runningNode = "10.0.0.11:6719";
                 string address = mchainStarter.InitBlockChain(runningNode);
-                Console.WriteLine("Yeah here is the address"+address);
+                RegisterNode("10.0.0.11",address,6718, "multichainrpc","topgeheimespasswort").GetAwaiter().GetResult();
+                Console.WriteLine("Permissionsgranted");
+                Userprocedure();
             }
+        }
 
+        private static void Userprocedure()
+        {
+            string key;
+            Console.WriteLine("1.) Start Blockchain");
+            Console.WriteLine("2.) Show Connected Nodes");
+            Console.WriteLine("3.) Show Datastreams");
+            Console.WriteLine("4.) Create Datastream");
+            Console.WriteLine("5.) Write into Datastream");
+            while ((key = Console.ReadKey().KeyChar.ToString()) != "6")
+            {
+                int keyValue;
+                int.TryParse(key, out keyValue);
 
+                ProcessInput(keyValue);
+            }
         }
 
         private static void ProcessInput(int keyValue)
@@ -53,24 +62,12 @@ namespace BCClient
 
                     if (mchainStarter.StartDaemon())
                     {
-                        Console.WriteLine("Jippie");
+                        Console.WriteLine("Node started");
                     }
                     else
                     {
                         Console.WriteLine("Node not started");
                     }
-                    
-                    /*
-                    var task = Task.Run(async () => { return await mchainStarter.StartDaemonAsync(); });
-                    if (task.Result == true)
-                    {
-                        Console.WriteLine("Node Started");
-                    }
-                    else if (task.Result == false)
-                    {
-                        Console.WriteLine("Nope");
-                    }
-                    */
                     break;
                 case 2:
                     Console.WriteLine("Starting Multichain");
@@ -106,16 +103,23 @@ namespace BCClient
             }
         }
 
-        public static bool ExistMultichain(string multichainName)
+        public static async Task RegisterNode(string runningNode, string newAddress, int port, string username, string password)
         {
-            List<string> multichainpaths = container.GetAllMultichainPaths();
-            
-            foreach(string mChainName in multichainpaths)
+            IEnumerable<string> address = new string[] { newAddress };
+            try
             {
-                if (mChainName.Contains(multichainName)) return true;
-                else return false;
+                var client = new MultiChainClient(runningNode, port, false, username, password, "sandjChain");
+                var connect = await client.GrantAsync(address, BlockchainPermissions.Connect, 0, "0", "0", 0, 0);
+                var admin = await client.GrantAsync(address, BlockchainPermissions.Admin, 0, "0", "0", 0, 0);
+                var issue = await client.GrantAsync(address, BlockchainPermissions.Issue, 0, "0", "0", 0, 0);
+                var send = await client.GrantAsync(address, BlockchainPermissions.Send, 0, "0", "0", 0, 0);
+                var receive = await client.GrantAsync(address, BlockchainPermissions.Receive, 0, "0", "0", 0, 0);
             }
-            return false;
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
+
     }
 }

@@ -126,6 +126,18 @@
   <data name="mainStream" xml:space="preserve">
     <value>root</value>
   </data>
+  <data name="rpcallowip" xml:space="preserve">
+    <value>0.0.0.0/0</value>
+  </data>
+  <data name="rpcpassword" xml:space="preserve">
+    <value>topgeheimespasswort</value>
+  </data>
+  <data name="rpcport" xml:space="preserve">
+    <value>6718</value>
+  </data>
+  <data name="rpcuser" xml:space="preserve">
+    <value>multichainrpc</value>
+  </data>
   <data name="valueStream" xml:space="preserve">
     <value>data</value>
   </data>
