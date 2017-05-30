@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="IO\MultichainContainer.cs" />
     <Compile Include="MChainController\MChainStart.cs" />
+    <Compile Include="MChainController\MChainstreamController.cs" />
     <Compile Include="Nodefinder\NodeFinder.cs" />
     <Compile Include="Nodefinder\Scanner\IpScanner.cs" />
     <Compile Include="Nodefinder\Scanner\PortScanner.cs" />

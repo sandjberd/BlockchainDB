@@ -15,6 +15,7 @@ namespace BCClient
     {
         private static MultichainContainer container = new MultichainContainer();
         private static MChainStart mchainStarter = new MChainStart();
+        private static MChainstreamController mchainCli = new MChainstreamController("sandjChain");
         private static string runningNode = "";
         static void Main(string[] args)
         {
@@ -70,7 +71,8 @@ namespace BCClient
                     }
                     break;
                 case 2:
-                    Console.WriteLine("Starting Multichain");
+                    Console.WriteLine("Show connected nodes");
+                    mchainCli.GetConnectedNodesLib().GetAwaiter().GetResult();
                     break;
                 case 3:
                     Console.WriteLine("Starting Multichain");

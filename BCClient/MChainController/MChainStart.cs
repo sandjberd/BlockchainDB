@@ -14,7 +14,6 @@ namespace BCClient.MChainController
     class MChainStart
     {
         private Process daemon = new Process();
-        private Process cli = new Process();
         private Process util = new Process();
         public MChainStart()
         {
