@@ -58,5 +58,25 @@ namespace BCClient.MChainController
                 Console.WriteLine(x.Result[i].Handshake);
             }
         }
+
+        public async Task GetStreamInfo(string streamname)
+        {
+            var x = await client.GetListStreamItems(streamname);
+            Console.WriteLine("Datensätze im Stream: "+x.Result.Count);
+            foreach (var value in x.Result)
+            {
+                Console.WriteLine(value.Data+": "+value.Key);
+            }
+        }
+
+        public async Task WriteIntoStream(string streamname, string data)
+        {
+            byte[] ba = Encoding.Default.GetBytes(data);
+            var hexString = BitConverter.ToString(ba);
+            hexString = hexString.Replace("-", "");
+
+            var x = await client.PublishIntoStream(streamname, data, hexString);
+            Console.WriteLine("TransactionID: "+x.Result);
+        }
     }
 }

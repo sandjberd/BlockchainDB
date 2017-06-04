@@ -510,6 +510,11 @@ namespace MultiChainLib
             return this.ExecuteAsync<List<StreamItemResponse>>("liststreamitems",0,stream);
         }
 
+        public Task<JsonRpcResponse<string>> PublishIntoStream(string stream, string data, string hexkey)
+        {
+            return this.ExecuteAsync<string>("publish", 0,stream, data, hexkey);
+        }
+
         public Task<JsonRpcResponse<List<string>>> GetAddressesByAccountAsync(string account)
         {
             return this.ExecuteAsync<List<string>>("getaddressesbyaccount", 0, account ?? string.Empty);

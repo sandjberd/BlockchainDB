@@ -15,6 +15,7 @@ namespace BCClient
     {
         private static MultichainContainer container = new MultichainContainer();
         private static MChainStart mchainStarter = new MChainStart();
+        private static NodeScanner scanner = new NodeScanner();
         private static MChainstreamController mchainCli = new MChainstreamController("sandjChain");
         private static string runningNode = "";
         static void Main(string[] args)
@@ -29,7 +30,8 @@ namespace BCClient
             else
             {
                 //Todo: need new Nodefinder
-                runningNode = "10.0.0.11:6719";
+                runningNode = scanner.GetNodes(6719,true)[0];
+                //runningNode = "10.0.0.11:6719";
                 string address = mchainStarter.InitBlockChain(runningNode);
                 RegisterNode("10.0.0.11",address,6718, "multichainrpc","topgeheimespasswort").GetAwaiter().GetResult();
                 Console.WriteLine("Permissionsgranted");
@@ -72,13 +74,15 @@ namespace BCClient
                     break;
                 case 2:
                     Console.WriteLine("Show connected nodes");
-                    mchainCli.GetConnectedNodesLib().GetAwaiter().GetResult();
+                    mchainCli.GetConnectedNodesLib().GetAwaiter().GetResult(); // Todo: Exception if Multichain is not started
                     break;
                 case 3:
-                    Console.WriteLine("Starting Multichain");
+                    Console.WriteLine("Reading datastream");
+                    mchainCli.GetStreamInfo("root").GetAwaiter().GetResult();
                     break;
                 case 4:
-                    Console.WriteLine("Starting Multichain");
+                    Console.WriteLine("Write something into stream");
+                    mchainCli.WriteIntoStream("root","Datensatz: "+DateTime.Now.ToString()).GetAwaiter().GetResult();
                     break;
                 case 5:
                     Console.WriteLine("Starting Multichain");

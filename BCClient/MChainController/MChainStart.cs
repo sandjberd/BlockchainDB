@@ -58,7 +58,7 @@ namespace BCClient.MChainController
                 string result = daemon.StandardOutput.ReadLineAsync().GetAwaiter().GetResult();
               
                 daemon.StandardOutput.Close();
-                if(result == "sandjChain@10.0.0.10:6719")
+                if(result.Contains("sandjChain@"))
                 {
                     return true;
                 }
