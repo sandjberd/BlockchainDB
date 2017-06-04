@@ -15,9 +15,7 @@ namespace BCClient
     {
         private static MultichainContainer container = new MultichainContainer();
         private static MChainStart mchainStarter = new MChainStart();
-        private static NodeScanner scanner = new NodeScanner();
         private static MChainstreamController mchainCli = new MChainstreamController("sandjChain");
-        private static string runningNode = "";
         static void Main(string[] args)
         {
             
@@ -29,12 +27,7 @@ namespace BCClient
             }
             else
             {
-                //Todo: need new Nodefinder
-                runningNode = scanner.GetNodes(6719,true)[0];
-                //runningNode = "10.0.0.11:6719";
-                string address = mchainStarter.InitBlockChain(runningNode);
-                RegisterNode("10.0.0.11",address,6718, "multichainrpc","topgeheimespasswort").GetAwaiter().GetResult();
-                Console.WriteLine("Permissionsgranted");
+                mchainStarter.InitBlockChain();
                 Userprocedure();
             }
         }
@@ -45,8 +38,8 @@ namespace BCClient
             Console.WriteLine("1.) Start Blockchain");
             Console.WriteLine("2.) Show Connected Nodes");
             Console.WriteLine("3.) Show Datastreams");
-            Console.WriteLine("4.) Create Datastream");
-            Console.WriteLine("5.) Write into Datastream");
+            Console.WriteLine("4.) Write into Datastream");
+            Console.WriteLine("5.) ");
             while ((key = Console.ReadKey().KeyChar.ToString()) != "6")
             {
                 int keyValue;
@@ -61,71 +54,60 @@ namespace BCClient
             switch (keyValue)
             {
                 case 1:
-                    Console.WriteLine("Starting Multichain");
-
-                    if (mchainStarter.StartDaemon())
-                    {
-                        Console.WriteLine("Node started");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Node not started");
-                    }
+                    StartMultichain();
                     break;
                 case 2:
-                    Console.WriteLine("Show connected nodes");
-                    mchainCli.GetConnectedNodesLib().GetAwaiter().GetResult(); // Todo: Exception if Multichain is not started
+                    ShowConnectedNodes();
                     break;
                 case 3:
-                    Console.WriteLine("Reading datastream");
-                    mchainCli.GetStreamInfo("root").GetAwaiter().GetResult();
+                    ReadStream();
                     break;
                 case 4:
-                    Console.WriteLine("Write something into stream");
-                    mchainCli.WriteIntoStream("root","Datensatz: "+DateTime.Now.ToString()).GetAwaiter().GetResult();
+                    WriteIntoStream();
                     break;
                 case 5:
-                    Console.WriteLine("Starting Multichain");
+                    Console.WriteLine("option");
                     break;
             }
         }
 
-        public static async Task RunAsync()
+        private static void StartMultichain()
         {
-            IEnumerable<string> address = new string[] { "1Tp4tJSnhtJefoXJKJUm5dFinCce7zZz9H13JK" };
-
-            var client = new MultiChainClient("192.168.1.107", 6718, false, "multichainrpc", "topgeheimespasswort", "sandjChain");
-            var x = await client.GetListStreamItems("root");
-            //var x = await client.GrantAsync(address, BlockchainPermissions.Connect,0,"0","0",0,0);
-            
-            
-
-            Console.WriteLine("RunAsync");
-            //x.AssertOk();
-            //Console.WriteLine(x.Result.ChainName);
-            for (int i = 0;i < x.Result.Count;i++)
+            Console.WriteLine("Starting multichain ...");
+            if (mchainStarter.StartDaemon())
             {
-                Console.WriteLine(x.Result[i].Key);
+                Console.WriteLine("Node started");
+            }
+            else
+            {
+                Console.WriteLine("Node not started");
             }
         }
-
-        public static async Task RegisterNode(string runningNode, string newAddress, int port, string username, string password)
+        
+        private static void ShowConnectedNodes()
         {
-            IEnumerable<string> address = new string[] { newAddress };
-            try
-            {
-                var client = new MultiChainClient(runningNode, port, false, username, password, "sandjChain");
-                var connect = await client.GrantAsync(address, BlockchainPermissions.Connect, 0, "0", "0", 0, 0);
-                var admin = await client.GrantAsync(address, BlockchainPermissions.Admin, 0, "0", "0", 0, 0);
-                var issue = await client.GrantAsync(address, BlockchainPermissions.Issue, 0, "0", "0", 0, 0);
-                var send = await client.GrantAsync(address, BlockchainPermissions.Send, 0, "0", "0", 0, 0);
-                var receive = await client.GrantAsync(address, BlockchainPermissions.Receive, 0, "0", "0", 0, 0);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            Console.WriteLine("Show connected nodes");
+            mchainCli.GetConnectedNodesLib().GetAwaiter().GetResult(); // Todo: Exception if Multichain is not started
         }
+
+        private static void ReadStream()
+        {
+            Console.WriteLine("Reading datastream");
+            Console.WriteLine("Enter a streamname [root]");
+            string streamname = Console.ReadLine();
+            mchainCli.GetStreamInfo(streamname).GetAwaiter().GetResult();
+        }
+
+        private static void WriteIntoStream()
+        {
+            Console.WriteLine("Write something into stream");
+            Console.WriteLine("Which stream? ");
+            string streamname = Console.ReadLine();
+            Console.WriteLine("Enter your data:");
+            string data = Console.ReadLine();
+            mchainCli.WriteIntoStream(streamname, data).GetAwaiter().GetResult();
+        }
+
 
     }
 }

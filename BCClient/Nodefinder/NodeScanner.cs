@@ -37,7 +37,7 @@ namespace BCClient.Nodefinder
                 Console.Write(" .");
                 if (PingHost(ip + i.ToString(), port))
                 {
-                    string node = ip + i.ToString() + ":" + port;
+                    string node = ip + i.ToString();
                     nodes.Add(node);
                     Console.WriteLine("Found: " + node);
                     if (single) break;
