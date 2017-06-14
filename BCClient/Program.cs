@@ -13,15 +13,17 @@ namespace BCClient
 {
     class Program
     {
+        private static string blockChainName = ConfigReader.GetChainName();
         private static MultichainContainer container = new MultichainContainer();
         private static MChainStart mchainStarter = new MChainStart();
-        private static MChainstreamController mchainCli = new MChainstreamController("sandjChain");
+        private static MChainstreamController mchainCli = new MChainstreamController(blockChainName);
+        
         static void Main(string[] args)
         {
             
             Console.WriteLine("BCClient started");
 
-            if (container.ExistMultichain("sandjChain"))
+            if (container.ExistMultichain(blockChainName))
             {
                 Userprocedure();
             }
@@ -35,11 +37,13 @@ namespace BCClient
         private static void Userprocedure()
         {
             string key;
+            Console.WriteLine("####################################");
             Console.WriteLine("1.) Start Blockchain");
             Console.WriteLine("2.) Show Connected Nodes");
             Console.WriteLine("3.) Show Datastreams");
             Console.WriteLine("4.) Write into Datastream");
-            Console.WriteLine("5.) ");
+            Console.WriteLine("5.) Create Datastream");
+            Console.WriteLine("####################################");
             while ((key = Console.ReadKey().KeyChar.ToString()) != "6")
             {
                 int keyValue;
@@ -55,15 +59,19 @@ namespace BCClient
             {
                 case 1:
                     StartMultichain();
+                    Userprocedure();
                     break;
                 case 2:
                     ShowConnectedNodes();
+                    Userprocedure();
                     break;
                 case 3:
                     ReadStream();
+                    Userprocedure();
                     break;
                 case 4:
                     WriteIntoStream();
+                    Userprocedure();
                     break;
                 case 5:
                     Console.WriteLine("option");
@@ -95,7 +103,14 @@ namespace BCClient
             Console.WriteLine("Reading datastream");
             Console.WriteLine("Enter a streamname [root]");
             string streamname = Console.ReadLine();
-            mchainCli.GetStreamInfo(streamname).GetAwaiter().GetResult();
+            try
+            {
+                mchainCli.GetStreamInfo(streamname).GetAwaiter().GetResult();
+            }
+            catch
+            {
+                Console.WriteLine("Wrong datastream");
+            }
         }
 
         private static void WriteIntoStream()

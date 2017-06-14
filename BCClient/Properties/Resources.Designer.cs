@@ -61,7 +61,7 @@ namespace BCClient.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die sandjChain ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die mainchain ähnelt.
         /// </summary>
         internal static string blockChainName {
             get {
